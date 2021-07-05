@@ -141,10 +141,11 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
         }
      }//fin nivel2
    }
+// Jheeremy
 void Mapa::pantalla(){//blit() lo copia a la pantalla
     blit(buffer.buffer,screen,0,0,0,0,buffer.ejeX,buffer.ejeY);//imprimimos el buffer sobre la pantalla
     //buffer origen y screen destino
-    //Copia un área rectangular del mapa de bits de origen en el mapa de bits de destino.
+    //Copia un Ã¡rea rectangular del mapa de bits de origen en el mapa de bits de destino.
 }//para mi
 void Mapa::Proceso(){
 
@@ -239,4 +240,4 @@ void Mapa::imprimirPuntosPantalla(){
 const char* Mapa::cantidadPuntos(){
     return CantPuntos[Mapa::getPuntos()];
 }
-
+// Jheeremy
