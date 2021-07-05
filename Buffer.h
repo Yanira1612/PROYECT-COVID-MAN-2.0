@@ -5,7 +5,7 @@ char mapa1[MAXFILAS][MAXCOLS]={
         "XoooooooooooXXXXXoooooooooooo",
         "X XXX XXXXX XXXXX XXXXX XXXoX",
         "X XXX XXXXX XXXXX XXXXX XXXoX",
-        "X ooooooooooooooooooooooooooX",
+        "X oooooooo oooooooooooooooooX",
         "X XXX XX XXXXXXXXXXX XX XXXoX",
         "X     XXoooooXXXoooooXX    oX",
         "X XXX XXXXXX XXX XXXXXXoXXXoX",
