@@ -22,36 +22,36 @@ void Enfermo::dibujarEnemigo(){
 void Enfermo::moverEnemigo(){
 	Enfermo::dibujarEnemigo();
 
-	if (E_dir==0){
+	if (E_dir==0){	//movimiento hacia la izquierda
 		if( mapa1[E_y/30][(E_x-30)/30] != 'X')
 			E_x-=30;
-		else
+		else		//para cuando haya un muro
 			E_dir=rand()%4; //valor al azar entre 0 y 4
 	}
-	if(E_dir==1){
+	if(E_dir==1){	//movimiento hacia la derecha
 		if( mapa1[E_y/30][(E_x+30)/30] != 'X')
 			E_x+=30;
 		else
 			E_dir=rand()%4; //valor al azar entre 0 y 4
 	}
 
-	if(E_dir==2){
+	if(E_dir==2){//movimiento hacia la arriba
 		if( mapa1[(E_y-30)/30][E_x/30] != 'X')
 			E_y-=30;
 		else
 			E_dir=rand()%4; //valor al azar entre 0 y 4
 	}
 
-	if(E_dir==3){
+	if(E_dir==3){	//movimiento hacia la abajo
 		if( mapa1[(E_y+30)/30][E_x/30] != 'X')
 			E_y+=30;
 		else
 			E_dir=rand()%4; //valor al azar entre 0 y 4
 	}
 	// movimiento para los atajos
-	if( E_x<=-30)
+	if( E_x<=-30) // si es menos a -30 en el mapa se redirecciona al costado izquiero
 		E_x=870;
-		else if(E_x >= 870)
+		else if(E_x >= 870) // si es menos a -30 en el mapa se redirecciona al costado derecho
 			E_x=-30;
 }
 
