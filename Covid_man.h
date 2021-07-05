@@ -19,6 +19,7 @@ class Covid_man{
     }
 
     int getVida();
+    const char* imprimirVida(int);
     void setVida(int);
     int getPosX();
     int getPosY();
@@ -30,6 +31,17 @@ class Covid_man{
     void atajo(int);
 
 };
+const char* Covid_man::imprimirVida(int vida){
+    if(vida==0)
+        return "0";
+    else if(vida==1)
+        return "1";
+    else if(vida ==2)
+        return "2";
+    else if(vida ==3)
+        return "3";
+    return "error";
+}
 void Covid_man::movimientoPacman(){
     if(key[KEY_LEFT])
             dir=0;
