@@ -19,6 +19,12 @@ const char* CantPuntos[]={"0","1","2","3","4","5","6","7","8","9"," 10"," 11"," 
                           "  201","  202","  203","  204","  205","  206","  207","  208","  209","  210","  201","  212","  213","  214","  215","  216","  217","  218","  219","  220"};
 class Mapa{
     private:
+        BITMAP *fondo1=load_bitmap("FONDO1.bmp",NULL);
+        BITMAP *fondo2=load_bitmap("FONDO2.bmp",NULL);
+        BITMAP *fondo3=load_bitmap("FONDO3.bmp",NULL);
+        BITMAP *cursor=load_bitmap("cursor.bmp",NULL);
+        bool salida=false;
+        bool entrar=true;
     //Buffer buffer;//Creamos un bitmap en la RAM
     Casa casa;//Imagen casa
     int nivel;//nivel en el que se encuentra el mapa
@@ -32,6 +38,7 @@ class Mapa{
     Enfermo enemigo3;
     public:
     Mapa(int,int,int);//(nombrefichero,nivel,ejex,ejey)
+    void menu();
     void Mostrar();//mOSTRAMOS TODO EL COMPORTAMIENTO DEL JUEGO EN LA PANTALLA
     void dibujar_mapa();//Creamos el mapa con todos sus componentes
     void pantalla();//Creamos el buffer enciam de la ventana
@@ -61,7 +68,29 @@ Mapa::Mapa(int nivel,int ejeX,int ejeY){
    buffer.buffer=create_bitmap(this->ejeX,this->ejeY);//(29*30,20*30) creamos un espacio rectangular
    this->nivel=nivel;
 }
+void Mapa::menu(){
+    while(!salida){
+        if(mouse_x>211 && mouse_x<553 && mouse_y>319 && mouse_y<374){
+            blit(fondo2,buffer.buffer,0,0,0,0,800,700);
+            if(mouse_b& 1){//1 es click derrecho mouse_b es click
+                salida=true;
+            }
+        }
+        else if(mouse_x>211 && mouse_x<404 && mouse_y>418 && mouse_y<465){
+            blit(fondo3,buffer.buffer,0,0,0,0,800,700);
+            if(mouse_b& 1){//1 es click derrecho mouse_b es click
+                salida=true;
+            }
+        }
+        else{
+            blit(fondo1,buffer.buffer,0,0,0,0,800,700);
+        }
+        masked_blit(cursor,buffer.buffer,0,0,mouse_x,mouse_y,13,22);
+        blit(buffer.buffer,screen,0,0,0,0,800,700);
+        clear(buffer.buffer);
+    }
 
+}
 void Mapa::setNivelMapa(int nivel){
    this->nivel=nivel;
 }
@@ -101,12 +130,12 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
         enemigo1.setNumMapa(Mapa::getNivelMapa());
         enemigo2.setNumMapa(Mapa::getNivelMapa());
         enemigo3.setNumMapa(Mapa::getNivelMapa());
-        for(int row=0;row<MAXFILAS;row++){
-          for(int col=0;col<MAXCOLS;col++){
-              if(mapa1[row][col]=='X'){
+        for(int row=0;row<MAXFILAS;row++){//busca en las y
+          for(int col=0;col<MAXCOLS;col++){//busca en las x
+              if(mapa1[row][col]=='X'){//si encuentra  un X en nuestra matriz del mapa me carga el sprite de la casita
                  draw_sprite(buffer.buffer,casa.casa,col*casa.ejeY,row*casa.ejeX);//Imprimimos casa sobre buffer
               }
-              else if(mapa1[row][col]=='o'){
+              else if(mapa1[row][col]=='o'){//si se encuentra un o entonces pintara un sprite de la comida
                  draw_sprite(buffer.buffer,comida.comida,col*30,row*30);
                  if((jugador.getPosY())/30==row && (jugador.getPosX())/30==col){//Dividimos entre 30 para que regrese a las dimensiones que le corresponde
                     mapa1[row][col]=' ';
@@ -126,9 +155,10 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
         for(int row=0;row<MAXFILAS;row++){
           for(int col=0;col<MAXCOLS;col++){
               if(mapa2[row][col]=='X'){
+                            //debemos escalar las imagenes para q me imprima en todo el cuadro
                 draw_sprite(buffer.buffer,casa.casa,col*casa.ejeX,row*casa.ejeY);//Imprimimos roca sobre buffer
               }
-              else if(mapa2[row][col]=='o'){
+              else if(mapa2[row][col]=='o'){//imrpimimos el sprite de comida en cada o de nuestra matriz
                  draw_sprite(buffer.buffer,comida.comida,col*30,row*30);
                  if((jugador.getPosY())/30==row && (jugador.getPosX())/30==col){//Dividimos entre 30 para que regrese a las dimensiones que le corresponde
                     mapa2[row][col]=' ';
@@ -136,12 +166,10 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
                  }
               }
 
-
           }
         }
      }//fin nivel2
    }
-// Jheeremy
 void Mapa::pantalla(){//blit() lo copia a la pantalla
     blit(buffer.buffer,screen,0,0,0,0,buffer.ejeX,buffer.ejeY);//imprimimos el buffer sobre la pantalla
     //buffer origen y screen destino
@@ -149,14 +177,38 @@ void Mapa::pantalla(){//blit() lo copia a la pantalla
 }//para mi
 void Mapa::Proceso(){
 
-    while(!key[KEY_ESC]){
+    pantalla();
+    menu();
+    while(!salida){
+        if(mouse_x>211 && mouse_x<553 && mouse_y>319 && mouse_y<374){
+            blit(fondo2,buffer.buffer,0,0,0,0,800,700);
+            if(mouse_b& 1){//1 es click derrecho mouse_b es click
+                salida=true;
+
+            }
+        }
+        else if(mouse_x>211 && mouse_x<404 && mouse_y>418 && mouse_y<465){
+            blit(fondo3,buffer.buffer,0,0,0,0,800,700);
+            if(mouse_b& 1){//1 es click derrecho mouse_b es click
+                salida=true;
+                entrar=false;
+            }
+        }
+        else{
+            blit(fondo1,buffer.buffer,0,0,0,0,800,700);
+        }
+        masked_blit(cursor,buffer.buffer,0,0,mouse_x,mouse_y,13,22);
+        blit(buffer.buffer,screen,0,0,0,0,800,700);
+    }
+    while(!key[KEY_ESC] and entrar){
          jugador.movimientoPacman();
          Mapa::dibujar_mapa();//creamos el buffer
 
          Mapa::mostrarNivelMapa();//Colocamos aqui para que no aprezca de forma parpadeante en pantalla
          Mapa::imprimirPuntosPantalla();
-         textout_centre_ex(buffer.buffer, font,"VIDAS:", 150, 630, 0xFFFFFF, 0);
-         textout_centre_ex(buffer.buffer, font,"3", 120, 640, 0xFFFFFF, 0);
+         textout_centre_ex(buffer.buffer, font,"VIDAS:", 210, 630, 0xFFFFFF, 0);
+
+         textout_centre_ex(buffer.buffer, font,jugador.imprimirVida(jugador.getVida()), 190, 640, 0xFFFFFF, 0);
          //Zona de declaracion de jugadores
          enemigo1.movimientoEnemigo();
          jugador.dibujarPacman();
@@ -185,6 +237,20 @@ void Mapa::Proceso(){
 
          rest(90);
          Mapa::avanzarNivel();
+         if(jugador.getVida()==0){//Si perdemos el juego
+            clear(buffer.buffer);
+            textout_centre_ex(buffer.buffer, font,"GAME OVER ", 390, 390, 0xFFFFFF, 0);
+            pantalla();
+            rest(10000);//Esperamos 10 segundos
+            break;
+         }
+         else if(Mapa::getNivelMapa()>2 && jugador.getVida()>0){
+            clear(buffer.buffer);
+            textout_centre_ex(buffer.buffer, font,"WIN ", 390, 390, 0xFFFFFF, 0);
+            pantalla();
+            rest(10000);//Esperamos 10 segundos
+            break;
+         }
     }
 }
 bool Mapa::Win(){//Para saber si hemos ganado
@@ -240,4 +306,3 @@ void Mapa::imprimirPuntosPantalla(){
 const char* Mapa::cantidadPuntos(){
     return CantPuntos[Mapa::getPuntos()];
 }
-// Jheeremy
