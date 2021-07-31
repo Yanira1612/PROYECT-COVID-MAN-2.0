@@ -4,9 +4,9 @@
 
 int main()
 {
-    allegro_init();//inicia la librería Allegro
+    allegro_init();//inicia la librerÃ­a Allegro
     install_keyboard();//nos permite utilizar las teclas
-
+    install_mouse();
     set_color_depth(32);
 
     //Inicializacion de la instancia Nivel 1
@@ -70,7 +70,7 @@ void dibujar_personaje(BITMAP*);
 bool game_over();
 int main()
 {
-    allegro_init();//inicia la librería Allegro
+    allegro_init();//inicia la librerÃ­a Allegro
     install_keyboard();//nos permite utilizar las teclas
 
     set_color_depth(32);
