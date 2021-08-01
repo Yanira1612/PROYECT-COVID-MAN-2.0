@@ -84,6 +84,7 @@ void Mapa::menu(){
             blit(fondo3,buffer.buffer,0,0,0,0,800,700);
             if(mouse_b& 1){//1 es click derrecho mouse_b es click
                 salida=true;
+                entrar=false;
             }
         }
         else{
