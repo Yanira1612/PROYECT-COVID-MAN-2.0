@@ -19,6 +19,10 @@ const char* CantPuntos[]={"0","1","2","3","4","5","6","7","8","9"," 10"," 11"," 
                           "  201","  202","  203","  204","  205","  206","  207","  208","  209","  210","  201","  212","  213","  214","  215","  216","  217","  218","  219","  220"};
 class Mapa{
     private:
+        //musica 
+    	  MIDI *musica= load_midi("musica_fondo.mid");
+    	  SAMPLE *recoger= load_wav("recoger.wav");
+  
         BITMAP *fondo1=load_bitmap("FONDO1.bmp",NULL);
         BITMAP *fondo2=load_bitmap("FONDO2.bmp",NULL);
         BITMAP *fondo3=load_bitmap("FONDO3.bmp",NULL);
