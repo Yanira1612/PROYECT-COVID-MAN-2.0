@@ -142,6 +142,7 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
               else if(mapa1[row][col]=='o'){//si se encuentra un o entonces pintara un sprite de la comida
                  draw_sprite(buffer.buffer,comida.comida,col*30,row*30);
                  if((jugador.getPosY())/30==row && (jugador.getPosX())/30==col){//Dividimos entre 30 para que regrese a las dimensiones que le corresponde
+                    play_sample(recoger,300,150,1000,0);
                     mapa1[row][col]=' ';
                     puntos++;
                  }
@@ -165,6 +166,7 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
               else if(mapa2[row][col]=='o'){//imrpimimos el sprite de comida en cada o de nuestra matriz
                  draw_sprite(buffer.buffer,comida.comida,col*30,row*30);
                  if((jugador.getPosY())/30==row && (jugador.getPosX())/30==col){//Dividimos entre 30 para que regrese a las dimensiones que le corresponde
+                    play_sample(recoger,300,150,1000,0);
                     mapa2[row][col]=' ';
                     puntos++;
                  }
@@ -204,6 +206,7 @@ void Mapa::Proceso(){
         masked_blit(cursor,buffer.buffer,0,0,mouse_x,mouse_y,13,22);
         blit(buffer.buffer,screen,0,0,0,0,800,700);
     }
+    play_midi(musica,1);
     while(!key[KEY_ESC] and entrar){
          jugador.movimientoPacman();
          Mapa::dibujar_mapa();//creamos el buffer
