@@ -2,6 +2,8 @@
 #include "Buffer.h"
 class Covid_man{
     private:
+    //musica
+    SAMPLE *muerte= load_wav("muerte.wav");
     BITMAP *pacbmp=load_bitmap("pacman.bmp",NULL);;//Creara un espacio en donde estara pacman
     BITMAP *muertebmp=load_bitmap("muerte.bmp",NULL);
     BITMAP *pacman=create_bitmap(33,33);//Dimensiones de un pacman;//Imagen pacman
@@ -183,6 +185,7 @@ void Covid_man::setVida(int vidas){
 }
 void Covid_man::muertePacman(int enemigoPOSx,int enemigoPOSy){
    if(Covid_man::getPosX()==enemigoPOSx && Covid_man::getPosY()==enemigoPOSy){
+      play_sample(muerte,300,150,1000,0);
       vidas--;
       for(int i=0;i<6;i++){
          clear(pacman);
