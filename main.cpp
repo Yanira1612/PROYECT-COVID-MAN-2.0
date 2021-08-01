@@ -18,7 +18,15 @@ int main()
     int ejeY=700;
 
     set_gfx_mode(GFX_AUTODETECT_WINDOWED,ejeX,ejeY,0,0);
-
+    
+	//codigo musica en allegro
+ 	if (install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL) != 0) {
+       allegro_message("Error: inicializando sistema de sonido\n%s\n", allegro_error);
+       return 1;
+    }
+    //control para el sonido, izq y der
+	set_volume(200, 200);
+    
     Mapa noob(nivel,ejeX,ejeY);
     //noob.setNivelMapa(1);
     noob.Mostrar();
