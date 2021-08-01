@@ -70,13 +70,13 @@ Mapa::Mapa(int nivel,int ejeX,int ejeY){
 }
 void Mapa::menu(){
     while(!salida){
-        if(mouse_x>211 && mouse_x<553 && mouse_y>319 && mouse_y<374){
+        if(mouse_x>294 && mouse_x<591 && mouse_y>285 && mouse_y<349){
             blit(fondo2,buffer.buffer,0,0,0,0,800,700);
             if(mouse_b& 1){//1 es click derrecho mouse_b es click
                 salida=true;
             }
         }
-        else if(mouse_x>211 && mouse_x<404 && mouse_y>418 && mouse_y<465){
+        else if(mouse_x>294 && mouse_x<591 && mouse_y>397 && mouse_y<461){
             blit(fondo3,buffer.buffer,0,0,0,0,800,700);
             if(mouse_b& 1){//1 es click derrecho mouse_b es click
                 salida=true;
