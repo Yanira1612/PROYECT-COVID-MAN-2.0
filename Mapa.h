@@ -186,27 +186,7 @@ void Mapa::Proceso(){
 
     pantalla();
     menu();
-    while(!salida){
-        if(mouse_x>211 && mouse_x<553 && mouse_y>319 && mouse_y<374){
-            blit(fondo2,buffer.buffer,0,0,0,0,800,700);
-            if(mouse_b& 1){//1 es click derrecho mouse_b es click
-                salida=true;
-
-            }
-        }
-        else if(mouse_x>211 && mouse_x<404 && mouse_y>418 && mouse_y<465){
-            blit(fondo3,buffer.buffer,0,0,0,0,800,700);
-            if(mouse_b& 1){//1 es click derrecho mouse_b es click
-                salida=true;
-                entrar=false;
-            }
-        }
-        else{
-            blit(fondo1,buffer.buffer,0,0,0,0,800,700);
-        }
-        masked_blit(cursor,buffer.buffer,0,0,mouse_x,mouse_y,13,22);
-        blit(buffer.buffer,screen,0,0,0,0,800,700);
-    }
+    
     play_midi(musica,1);
     while(!key[KEY_ESC] and entrar){
          jugador.movimientoPacman();
