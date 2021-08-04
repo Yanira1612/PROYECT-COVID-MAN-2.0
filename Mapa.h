@@ -26,12 +26,12 @@ class Mapa{
     MIDI *musica= load_midi("musica_fondo.mid");
     SAMPLE *recoger= load_wav("recoger.wav");
 
-    BITMAP *fondo1=load_bitmap("FONDO1.bmp",nullptr);
-    BITMAP *fondo2=load_bitmap("FONDO2.bmp",nullptr);
-    BITMAP *fondo3=load_bitmap("FONDO3.bmp",nullptr);
-    BITMAP *cursor=load_bitmap("cursor.bmp",nullptr);
-    BITMAP *over=load_bitmap("over.bmp",nullptr);
-    BITMAP *win=load_bitmap("win.bmp",nullptr);
+    BITMAP *fondo1=load_bitmap("FONDO1.bmp",NULL);
+    BITMAP *fondo2=load_bitmap("FONDO2.bmp",NULL);
+    BITMAP *fondo3=load_bitmap("FONDO3.bmp",NULL);
+    BITMAP *cursor=load_bitmap("cursor.bmp",NULL);
+    BITMAP *over=load_bitmap("over.bmp",NULL);
+    BITMAP *win=load_bitmap("win.bmp",NULL);
     //Buffer buffer;//Creamos un bitmap en la RAM
     //Casa casa;//Imagen casa
     int nivel;//nivel en el que se encuentra el mapa
@@ -59,6 +59,7 @@ class Mapa{
     void mostrarNivelMapa();//Mostramos el nivel del mapa en pantalla
     const char* cantidadPuntos();//Nos devolvera cuantos puntos tiene el jugador
     void imprimirPuntosPantalla();//Imprimiremos los puntos en pantalla
+    void mostrarPausa();
     void cruce();
     void mostrarWin(bool);
     void mostrarOver(bool);
@@ -138,7 +139,7 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
               else if(mapa1[row][col]=='o'){//Coordenada para dibujar comida
                  draw_sprite(buffer.buffer,pastilla->getPastilla(),col*pastilla->getEjeX(),row*pastilla->getEjeY());
                  if((jugador.getPosY())/30==row && (jugador.getPosX())/30==col){//Dividimos entre 30 para que regrese a las dimensiones que le corresponde
-                    //play_sample(recoger,300,150,1000,0);
+                    play_sample(recoger,300,150,1000,0);
                     mapa1[row][col]=' ';
                     puntos++;
                  }
@@ -146,7 +147,7 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
               else if(mapa1[row][col]=='v'){
                  draw_sprite(buffer.buffer,vacuna->getVacuna(),col*vacuna->getEjeX(),row*vacuna->getEjeY());
                  if((jugador.getPosY())/30==row && (jugador.getPosX())/30==col){//Dividimos entre 30 para que regrese a las dimensiones que le corresponde
-                    //play_sample(recoger,300,150,1000,0);
+                    play_sample(recoger,300,150,1000,0);
                     mapa1[row][col]=' ';
                     puntos=puntos+2;
                  }
@@ -176,11 +177,11 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
                     puntos++;
                  }
               }
-              else if(mapa1[row][col]=='v'){
+              else if(mapa2[row][col]=='v'){
                  draw_sprite(buffer.buffer,vacuna->getVacuna(),col*vacuna->getEjeX(),row*vacuna->getEjeY());
                  if((jugador.getPosY())/30==row && (jugador.getPosX())/30==col){//Dividimos entre 30 para que regrese a las dimensiones que le corresponde
                     play_sample(recoger,300,150,1000,0);
-                    mapa1[row][col]=' ';
+                    mapa2[row][col]=' ';
                     puntos=puntos+2;
                  }
               }
@@ -197,15 +198,17 @@ void Mapa::pantalla(){//blit() lo copia a la pantalla
 }//para mi
 void Mapa::Proceso(){
     pantalla();
-
     menu();//pantalla de inicio del usuario
-    //play_midi(musica,1);
+    play_midi(musica,0);
     while(!key[KEY_ESC] && entrar==true){
+    		
          jugador.movimiento();
+         jugador.ganarVida(puntos);
          Mapa::dibujar_mapa();//creamos el buffer
 
          Mapa::mostrarNivelMapa();//Colocamos aqui para que no aprezca de forma parpadeante en pantalla
          Mapa::imprimirPuntosPantalla();
+         Mapa::mostrarPausa();
          textout_centre_ex(buffer.buffer, font,"VIDAS:", 210, 630, 0xFFFFFF, 0);
          textout_centre_ex(buffer.buffer, font,jugador.imprimirVida(jugador.getVida()), 190, 640, 0xFFFFFF, 0);
 
@@ -227,6 +230,20 @@ void Mapa::Proceso(){
 
          Mapa::mostrarOver(entrar);
          Mapa::mostrarWin(entrar);
+         
+         if(key[KEY_P]){
+            clear(buffer.buffer);
+            //textout_centre_ex(buffer.buffer, font,"WIN ", 390, 390, 0xFFFFFF, 0);
+            blit(win,buffer.buffer,0,0,0,0,1280,930);
+            pantalla();
+            rest(90);
+            clear_keybuf();
+            while(true){
+                if(key[KEY_P]){
+                    break;
+                }
+            }
+         }
     }
 }
 void Mapa::menu(){
@@ -369,6 +386,10 @@ void Mapa::mostrarNivelMapa(){
 void Mapa::imprimirPuntosPantalla(){
    textout_centre_ex(buffer.buffer, font,"PUNTAJE:", 120, 630, 0xFFFFFF, 0);
    textout_centre_ex(buffer.buffer, font,Mapa::cantidadPuntos(), 90, 640, 0xFFFFFF, 0);
+}
+
+void Mapa::mostrarPausa(){
+	textout_centre_ex(buffer.buffer, font,"PAUSAR CON LA LETRA 'P' ",350, 630, 0xFFFFFF, 0);
 }
 const char* Mapa::cantidadPuntos(){
     return CantPuntos[Mapa::getPuntos()];
