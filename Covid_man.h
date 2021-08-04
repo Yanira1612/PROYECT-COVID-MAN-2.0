@@ -1,38 +1,72 @@
 #include <allegro.h>
-#include "Buffer.h"
-class Covid_man{
+#include "Enfermo.h"
+class Covid_man : public Personaje{
     private:
-    //musica
-    SAMPLE *muerte= load_wav("muerte.wav");
-    BITMAP *pacbmp=load_bitmap("pacman.bmp",NULL);;//Creara un espacio en donde estara pacman
-    BITMAP *muertebmp=load_bitmap("muerte.bmp",NULL);
-    BITMAP *pacman=create_bitmap(33,33);//Dimensiones de un pacman;//Imagen pacman
-    int dir=4;//para que pacman no se mueva al iniciar el juego
-    int px=30*14,py=30*17;//posicion adecuada de pacman
-    int numMapa=1;
-    int vidas=3;
+    SAMPLE *muerte=nullptr;
+    BITMAP *pacbmp=nullptr;//Creara un espacio en donde estara pacman
+    BITMAP *muertebmp=nullptr;
+    BITMAP *pacman=nullptr;//Dimensiones de un pacman;//Imagen pacman
+    int dir;//para que pacman no se mueva al iniciar el juego
+    int px,py;//posicion adecuada de pacman
+    int numMapa;
+    int vidas;
     public:
-    BITMAP* getMuertebmp(){return muertebmp;}
-    void setPacman(BITMAP* pacman){
-       this->pacman=pacman;
-    }
-    BITMAP* getPacman(){
-       return this->pacman;
-    }
+    Covid_man();
+    ~Covid_man();
+
+    SAMPLE* getMusicMuerte();
+    BITMAP* getMuertebmp();
+    void setPacman(BITMAP* pacman);
+    BITMAP* getPacman();
 
     int getVida();
     const char* imprimirVida(int);
     void setVida(int);
-    int getPosX();
-    int getPosY();
-    void setNumMapa(int);
-    void movimientoPacman();
-    void dibujarPacman();
+    int getPosX();//
+    int getPosY();//
+    void setNumMapa(int);//
+    void movimiento();//
+    void dibujar();//
     void morderPacman();
-    void muertePacman(int,int);
-    void atajo(int);
+    void inicioMuerte();
+    void finalMuerte(int);
+    void atajo(int);//
 
 };
+SAMPLE* Covid_man::getMusicMuerte(){
+    return muerte;
+}
+Covid_man::~Covid_man(){
+
+}
+Covid_man::Covid_man(){
+    this->muerte= load_wav("muerte.wav");
+    this->pacbmp=load_bitmap("covid_man.bmp",NULL);;//Creara un espacio en donde estara pacman
+    this->muertebmp=load_bitmap("muerte.bmp",NULL);
+    this->pacman=create_bitmap(33,33);//Dimensiones de un pacman;//Imagen pacman
+    this->dir=4;//para que pacman no se mueva al iniciar el juego
+    this->px=30*14;
+    this->py=30*17;//posicion adecuada de pacman
+    this->numMapa=1;
+    this->vidas=3;
+}
+BITMAP* Covid_man::getMuertebmp(){
+    return muertebmp;
+    }
+void Covid_man::setPacman(BITMAP* pacman){
+    this->pacman=pacman;
+    }
+BITMAP* Covid_man::getPacman(){
+    return this->pacman;
+    }
+void Covid_man::inicioMuerte(){
+    clear(pacman);
+    clear(buffer.buffer);
+}
+void Covid_man::finalMuerte(int i){
+    blit(muertebmp,pacman,i*33,0,0,0,33,33);
+    draw_sprite(buffer.buffer,pacman,px,py);
+}
 const char* Covid_man::imprimirVida(int vida){
     if(vida==0)
         return "0";
@@ -44,7 +78,7 @@ const char* Covid_man::imprimirVida(int vida){
         return "3";
     return "error";
 }
-void Covid_man::movimientoPacman(){
+void Covid_man::movimiento(){
     if(key[KEY_LEFT])
             dir=0;
     else if(key[KEY_RIGHT])
@@ -111,7 +145,7 @@ void Covid_man::movimientoPacman(){
     Covid_man::atajo(numMapa);
     clear(buffer.buffer);//borramos posiciones anteriores de pacman
 }
-void Covid_man::dibujarPacman(){
+void Covid_man::dibujar(){
 
     blit(pacbmp,pacman,dir*33,0,0,0,33,33);
     draw_sprite(buffer.buffer,pacman,px,py);//para respetar transparencia
@@ -183,27 +217,16 @@ int Covid_man::getVida(){
 void Covid_man::setVida(int vidas){
    this->vidas=vidas;
 }
-void Covid_man::muertePacman(int enemigoPOSx,int enemigoPOSy){
-   if(Covid_man::getPosX()==enemigoPOSx && Covid_man::getPosY()==enemigoPOSy){
-      play_sample(muerte,300,150,1000,0);
-      vidas--;
-      for(int i=0;i<6;i++){
-         clear(pacman);
-         clear(buffer.buffer);
-         //dibujar_mapa();
-         blit(muertebmp,pacman,i*33,0,0,0,33,33);
-         draw_sprite(buffer.buffer,pacman,px,py);
 
-         blit(buffer.buffer,screen,0,0,0,0,buffer.ejeX,buffer.ejeY);//pantalla()
-         rest(70);
-      }
-   }
-}
+
+
+
+
+
 
 
 //Enfermo
-
-#include <cstdlib>
+/*#include <cstdlib>
 class Enfermo{
 	private:
     BITMAP *enemigobmp=load_bitmap("enemigo.bmp",NULL);;//Creara un espacio en donde estara el enemigo
@@ -338,4 +361,5 @@ void Enfermo::atajo(int numMapa){
             E_dir=0;//Para que vaya en la direccion correcta
         }
    }
-}
+}*/
+

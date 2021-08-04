@@ -5,9 +5,9 @@ char mapa1[MAXFILAS][MAXCOLS]={
         "XoooooooooooXXXXXoooooooooooo",
         "X XXX XXXXX XXXXX XXXXX XXXoX",
         "X XXX XXXXX XXXXX XXXXX XXXoX",
-        "X oooooooo oooooooooooooooooX",
+        "X ooooooooooooooooooooooooooX",
         "X XXX XX XXXXXXXXXXX XX XXXoX",
-        "X     XXoooooXXXoooooXX    oX",
+        "X vvv XXoooooXXXoooooXX    oX",
         "X XXX XXXXXX XXX XXXXXXoXXXoX",
         "XXXXX XX             XX XXXXX",
         "ooooooXX XXXXXXXXXXX XXoooooo",
@@ -45,7 +45,7 @@ char mapa2[MAXFILAS][MAXCOLS]={
         "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     };
 struct Buffer{
-    BITMAP *buffer=NULL;
+    BITMAP *buffer=nullptr;
     int ejeX=880;
     int ejeY=700;
 
