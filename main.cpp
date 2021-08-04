@@ -29,7 +29,7 @@ int main()
 	set_volume(200, 200);
 
     Mapa noob(nivel,ejeX,ejeY);
-    //noob.setNivelMapa(1);
+    noob.setNivelMapa(2);
     noob.Mostrar();
 
     return 0;

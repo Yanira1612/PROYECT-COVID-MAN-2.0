@@ -24,28 +24,28 @@ char mapa1[MAXFILAS][MAXCOLS]={
     };
 char mapa2[MAXFILAS][MAXCOLS]={
         "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "X           XXXXX            ",
+        "X  vvvv     XXXXX    vvvv    ",
         "X XXX XXXXX XXXXX XXXXX XXX X",
-        "X XXX                   XXX X",
-        "X          o                X",
+        "X XXX    XX   X  XX     XXX X",
+        "X   vvv    o  vvv           X",
         "X XXX XX XXXXXXXXXXX XX XXX X",
         "X     XX  o  XXX     XX     X",
         "X XXX XXXXXX XXX XXXXXX X X X",
-        "X XXX XX       o     XX X X X",
+        "X XXX XX  vv   o     XX X X X",
         "      XX XXXXXXXXXXX XX      ",
         "X XXX XX XXXX   XXXX XX XXXXX",
-        "X XXX XX             XX XXX  ",
+        "X XXX XX         vv  XX XXX  ",
         "X XXX XXXXXX XXX XXXXXX XXX X",
         "X     XX     XXX     XX     X",
         "X XXX XX XXXXXXXXXXX XX XXX X",
-        "X XXX  o       o        XXX X",
+        "X XXX  o  vv   o   vv   XXX X",
         "X XXX XXXX XXXXXXXX XXX XXX X",
         "X XXX XXXX          XXX XXX X",
-        "           XXXXXXXX          ",
+        "    vvv    XXXXXXXX   vvv    ",
         "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     };
 struct Buffer{
-    BITMAP *buffer=nullptr;
+    BITMAP *buffer;
     int ejeX=880;
     int ejeY=700;
 

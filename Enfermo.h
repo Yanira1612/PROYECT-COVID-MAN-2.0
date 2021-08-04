@@ -2,8 +2,8 @@
 #include "Personaje.h"
 class Enfermo : public Personaje{
 	private:
-    BITMAP *enemigobmp=nullptr;//Creara un espacio en donde estara el enemigo
-    BITMAP *enemigo=nullptr;//Dimensiones de un pacman;//Imagen del enemigo
+    BITMAP *enemigobmp=NULL;//Creara un espacio en donde estara el enemigo
+    BITMAP *enemigo=NULL;//Dimensiones de un pacman;//Imagen del enemigo
     int E_dir;
     int E_x,E_y; //coordenadas	 en el mapa
     int numMapa;

@@ -2,7 +2,7 @@
 #include <allegro.h>
 class Casa : public Obstaculos{
    private:
-   BITMAP *casa=nullptr;//Variable de la imagen del muro;
+   BITMAP *casa=NULL;//Variable de la imagen del muro;
    const char** tipoCasa;
    int ejeX;
    int ejeY;
@@ -42,12 +42,12 @@ void Casa::setTipo(int tipo){
 }
 void Casa::definirCasa(){
   if(tipo%2==0){
-    this->casa=load_bitmap("casita.bmp",nullptr);
+    this->casa=load_bitmap("casita.bmp",NULL);
   }
   else if(tipo%3==0){
-    this->casa=load_bitmap("casa1.bmp",nullptr);
+    this->casa=load_bitmap("casa1.bmp",NULL);
   }
   else{
-    this->casa=load_bitmap("casa2.bmp",nullptr);
+    this->casa=load_bitmap("casa2.bmp",NULL);
   }
 }

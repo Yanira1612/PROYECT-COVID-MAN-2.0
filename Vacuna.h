@@ -1,8 +1,7 @@
-
 #include "Pastilla.h"
 class Vacuna : public Comida{
    private:
-   BITMAP *vacuna=nullptr;//Variable de la imagen del muro;
+   BITMAP *vacuna=NULL;//Variable de la imagen del muro;
    int ejeX;
    int ejeY;
    public:
@@ -16,7 +15,7 @@ Vacuna::~Vacuna(){
 
 }
 Vacuna::Vacuna(){
-   this->vacuna=load_bitmap("vacuna.bmp",nullptr);//
+   this->vacuna=load_bitmap("vacuna.bmp",NULL);//
    this->ejeX=30;
    this->ejeY=30;
 }
