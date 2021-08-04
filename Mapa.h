@@ -74,27 +74,26 @@ Mapa::Mapa(int nivel,int ejeX,int ejeY){
 }
 void Mapa::menu(){
     while(!salida){
-        if(mouse_x>294 && mouse_x<591 && mouse_y>285 && mouse_y<349){
-            blit(fondo2,buffer.buffer,0,0,0,0,800,700);
+        if(mouse_x>380 && mouse_x<500 && mouse_y>290 && mouse_y<345){//comenzar
+            blit(fondo2,buffer.buffer,0,0,0,0,880,700);
             if(mouse_b& 1){//1 es click derrecho mouse_b es click
                 salida=true;
             }
         }
-        else if(mouse_x>294 && mouse_x<591 && mouse_y>397 && mouse_y<461){
-            blit(fondo3,buffer.buffer,0,0,0,0,800,700);
+        else if(mouse_x>380 && mouse_x<500 && mouse_y>400 && mouse_y<460){
+            blit(fondo3,buffer.buffer,0,0,0,0,880,700);
             if(mouse_b& 1){//1 es click derrecho mouse_b es click
                 salida=true;
                 entrar=false;
             }
         }
         else{
-            blit(fondo1,buffer.buffer,0,0,0,0,800,700);
+            blit(fondo1,buffer.buffer,0,0,0,0,880,700);
         }
         masked_blit(cursor,buffer.buffer,0,0,mouse_x,mouse_y,13,22);
-        blit(buffer.buffer,screen,0,0,0,0,800,700);
+        blit(buffer.buffer,screen,0,0,0,0,880,700);
         clear(buffer.buffer);
     }
-
 }
 void Mapa::setNivelMapa(int nivel){
    this->nivel=nivel;
@@ -186,7 +185,6 @@ void Mapa::Proceso(){
 
     pantalla();
     menu();
-    
     play_midi(musica,1);
     while(!key[KEY_ESC] and entrar){
          jugador.movimientoPacman();
