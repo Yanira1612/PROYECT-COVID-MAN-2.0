@@ -1,6 +1,7 @@
 #include "Mapa.h"
 Mapa::~Mapa(){
-
+	delete pastilla;
+	delete  vacuna;
 
 
 }
