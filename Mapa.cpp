@@ -117,7 +117,7 @@ void Mapa::dibujar_mapa(){//Dibujamos el mapa de acuerdo al nivel
 void Mapa::pantalla(){//blit() lo copia a la pantalla
     blit(buffer.buffer,screen,0,0,0,0,buffer.ejeX,buffer.ejeY);//imprimimos el buffer sobre la pantalla
     //buffer origen y screen destino
-    //Copia un área rectangular del mapa de bits de origen en el mapa de bits de destino.
+    //Copia un Ã¡rea rectangular del mapa de bits de origen en el mapa de bits de destino.
 }//para mi
 void Mapa::Proceso(){
     pantalla();
@@ -157,7 +157,7 @@ void Mapa::Proceso(){
          if(key[KEY_P]){
             clear(buffer.buffer);
             //textout_centre_ex(buffer.buffer, font,"WIN ", 390, 390, 0xFFFFFF, 0);
-            blit(win,buffer.buffer,0,0,0,0,1280,930);
+            blit(pausa,buffer.buffer,0,0,0,0,1280,930);
             pantalla();
             rest(90);
             clear_keybuf();
