@@ -1,4 +1,4 @@
-#include "Pastilla.h"
+#include "Pastilla.cpp"
 class Vacuna : public Comida{
    private:
    BITMAP *vacuna=NULL;//Variable de la imagen del muro;
@@ -11,20 +11,4 @@ class Vacuna : public Comida{
    int getEjeY();
    BITMAP* getVacuna();
 };
-Vacuna::~Vacuna(){
 
-}
-Vacuna::Vacuna(){
-   this->vacuna=load_bitmap("vacuna.bmp",NULL);//
-   this->ejeX=30;
-   this->ejeY=30;
-}
-int Vacuna::getEjeX(){
-   return ejeX;
-}
-int Vacuna::getEjeY(){
-   return ejeY;
-}
-BITMAP* Vacuna::getVacuna(){
-   return vacuna;
-}
