@@ -1,10 +1,5 @@
 #include "Mapa.h"
-Mapa::~Mapa(){
-	delete pastilla;
-	delete  vacuna;
 
-
-}
 Mapa::Mapa(int nivel,int ejeX,int ejeY){
    this->ejeX=ejeX;
    this->ejeY=ejeY;
@@ -318,4 +313,9 @@ void Mapa::mostrarPausa(){
 const char* Mapa::cantidadPuntos(){
     return CantPuntos[Mapa::getPuntos()];
 }
+Mapa::~Mapa(){
+	delete pastilla;
+	delete  vacuna;
 
+
+}
