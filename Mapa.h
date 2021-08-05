@@ -32,6 +32,7 @@ class Mapa{
     BITMAP *cursor=load_bitmap("cursor.bmp",NULL);
     BITMAP *over=load_bitmap("over.bmp",NULL);
     BITMAP *win=load_bitmap("win.bmp",NULL);
+    BITMAP *pausa=load_bitmap("PAUSA.bmp",NULL);
     //Buffer buffer;//Creamos un bitmap en la RAM
     //Casa casa;//Imagen casa
     int nivel;//nivel en el que se encuentra el mapa
